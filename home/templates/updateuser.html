@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Add Vehicle {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class = "container mb-5" style = "max-width: 50%; float: left;">
+    <div class = "card mt-5" style = "border: none;">
+        <div class = "container" style = "max-width: 100%;">
+            <div class = "row">
+                <div class = "col-sm-12">
+                    <h3 style = "font-size: 55px; font-weight: lighter;"> Update User </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class = "card-body mt-3">
+            <form method = "POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" name = "username" placeholder="Enter Username" value = "{{ usre.username }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" name = "email" placeholder="Enter email" value = "{{usre.email}}">
+                </div>
+                <div class = "row">
+                    <div class = "col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" name = "password1" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label >User Role <span style = "color: red;">*</span></label><br />
+                        <select name="group" class = "form-control">
+                            <option disabled> Select </option>
+                            {% for x in group %}
+                              {% if x.id in use_edit.groups %}
+                                <option selected value="{{ x.id }}">{{ x }}</option>
+                              {% else %}
+                              <option value="{{x.id}}">{{x.name}}</option>
+                              {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                {% if messages %}
+                <div class = "alert alert-danger" style = "padding: 12px 0px 0px 12px;">
+                    <ul class="messages p-0" style = "list-style: none;">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div class = "mb-5 mt-5">
+                    <button class = "btn btn-md btn-primary" type = "submit"> Update User </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -21,14 +21,24 @@
         <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto" id = "imp_links">
                 {% if user.is_authenticated %}
-                    <li class="nav-item text-center">
+                    <li class="nav-item text-center mr-2">
                         <a class="nav-link" href="/"> <i class="fas fa-home"></i> Home</a>
                     </li>
     
-                    <li class="nav-item text-center">
+                    <li class="nav-item text-center mr-2">
                         <a class="nav-link" href="{% url 'add_vehicle' %}"><i class="fa-solid fa-square-plus"></i> Add Vehicle</a>
                     </li>
-                    {% else %}
+
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'superadmin' %}
+                            <li class="nav-item text-center mr-1">
+                                <a class="nav-link" href="{% url 'user_list' %}"><i class="fas fa-user-shield"></i> Users </a>
+                            </li>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}    
+
+                {% else %}
                     <li class="nav-item text-center">
                         <a class="nav-link" href="/"> <i class="fas fa-home"></i> Home</a>
                     </li>

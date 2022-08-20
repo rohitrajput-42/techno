@@ -9,4 +9,9 @@ urlpatterns = [
     path('error_403/', error_403, name = "error_403"),
     path('error_404/', error_404, name = "error_404"),
     path('error_500/', error_500, name = "error_500"),
+
+    path('user_list', userlist, name = "user_list"),
+    path('add_user', adduser, name = "add_user"),
+    path('delete_user/<int:id>', deleteuser, name = "delete_user"),
+    path('update_user/<int:id>', updateuser, name = "update_user"),
 ]
